@@ -1,0 +1,1 @@
+web: gunicorn moongchi.wsgi --log-file -

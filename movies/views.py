@@ -6,7 +6,7 @@ from community.models import Rating
 from pprint import pprint
 from accounts.models import User
 from justwatch import JustWatch
-from moongchi.my_settings import MY_SECRET
+# from moongchi.my_settings import MY_SECRET
 from .serializers import (MovieListSerializer, MovieDetailSerializer, MovieSearchListSerializer,
     CelebSerializer, MovieRecommendedSerializer)
 from rest_framework import status
@@ -23,7 +23,7 @@ import datetime
 
 with open('movies/recommendations.p', 'rb') as file:
     recommendations = pickle.load(file)
-A_K = MY_SECRET['TMDB_KEY']
+# A_K = MY_SECRET['TMDB_KEY']
 
 
 # 메인페이지 영화
