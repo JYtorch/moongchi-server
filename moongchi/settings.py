@@ -29,6 +29,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # DEBUG = True
 
 ALLOWED_HOSTS = [
+    'https://moongchi.netlify.app',
     'moongchi-server.herokuapp.com',
     '127.0.0.1'
 ]
