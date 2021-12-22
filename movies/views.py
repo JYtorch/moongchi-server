@@ -6,7 +6,7 @@ from community.models import Rating
 from pprint import pprint
 from accounts.models import User
 from justwatch import JustWatch
-# from moongchi.my_settings import MY_SECRET
+from moongchi.my_settings import MY_SECRET
 from .serializers import (MovieListSerializer, MovieDetailSerializer, MovieSearchListSerializer,
     CelebSerializer, MovieRecommendedSerializer)
 from rest_framework import status
