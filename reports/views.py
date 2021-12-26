@@ -55,7 +55,7 @@ def nestedcomment_report(request, nestedcomment_id):
         return Response({'detail': '이미 신고한 댓글입니다.'}, status=status.HTTP_403_FORBIDDEN)
     serializer = NestedCommentReportSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(author=request.user, nestedcomment=nestedcomment)
+        serializer.save(author=request.user, nested_comment=nestedcomment)
         if nestedcomment.reported_users.count() >= 10:
             nestedcomment.delete()
             return Response({'detail': '신고된 횟수가 10번이 넘어 게시글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
