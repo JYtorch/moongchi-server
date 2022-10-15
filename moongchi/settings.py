@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=False, cast=bool)
-# DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # DEBUG = True
 
 # ALLOWED_HOSTS = [    
@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'moongchi.urls'
 
 TEMPLATES = [
@@ -97,22 +97,22 @@ WSGI_APPLICATION = 'moongchi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-if os.getenv("DJANGO_DATABASE_URL", None) is None:
-    raise Exception("DJANGO_DATABASE_URL environment variable not defined")
-DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
-DB_PARAMS["NAME"] = "moongchi"
-DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
-DB_PARAMS["OPTIONS"] = {"ssl": "true", "charset": "utf8mb4"}
-
 DATABASES = {
-    "default": DB_PARAMS,
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+# if os.getenv("DJANGO_DATABASE_URL", None) is None:
+#     raise Exception("DJANGO_DATABASE_URL environment variable not defined")
+# DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
+# DB_PARAMS["NAME"] = "moongchi"
+# DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
+# DB_PARAMS["OPTIONS"] = {"ssl": "true", "charset": "utf8mb4"}
+
+# DATABASES = {
+#     "default": DB_PARAMS,
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
