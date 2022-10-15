@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config('DEBUG', default=False, cast=bool)
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+# DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # DEBUG = True
 
 # ALLOWED_HOSTS = [    
@@ -108,7 +108,8 @@ if os.getenv("DJANGO_DATABASE_URL", None) is None:
 DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
 DB_PARAMS["NAME"] = "moongchi"
 DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
-print("★★★★★★★★★★★★★★★★★★★★★★★★★", DB_PARAMS)
+DB_PARAMS["OPTIONS"] = {"ssl": "true", "charset": "utf8mb4"}
+
 DATABASES = {
     "default": DB_PARAMS,
 }
