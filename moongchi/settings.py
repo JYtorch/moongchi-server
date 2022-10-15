@@ -38,7 +38,11 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # ]
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
-
+CORS_ALLOWED_ORIGINS = [    
+    "https://moongchi.netlify.app",
+    "http://localhost:8080",
+    "http://127.0.0.1"
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -72,7 +76,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-CORS_ORIGIN_ALLOW_ALL = True
+
 ROOT_URLCONF = 'moongchi.urls'
 
 TEMPLATES = [
