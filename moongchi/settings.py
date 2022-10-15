@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
+from django.core.management.utils import get_random_secret_key
 
 from pathlib import Path
 # from .my_settings import MY_SECRET
@@ -23,15 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = MY_SECRET['SECRET_KEY']
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # DEBUG = True
 
-ALLOWED_HOSTS = [    
-    'moongchi-server.herokuapp.com',
-    '127.0.0.1'
-]
+# ALLOWED_HOSTS = [    
+#     'moongchi-server.herokuapp.com',
+#     '127.0.0.1'
+# ]
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 
 # Application definition
@@ -92,13 +97,21 @@ WSGI_APPLICATION = 'moongchi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+if os.getenv("DJANGO_DATABASE_URL", None) is None:
+    raise Exception("DJANGO_DATABASE_URL environment variable not defined")
+DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
+DB_PARAMS["NAME"] = "moongchi"
+DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
+print("★★★★★★★★★★★★★★★★★★★★★★★★★", DB_PARAMS)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": DB_PARAMS,
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -137,7 +150,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles' 
+# STATIC_ROOT = BASE_DIR / 'staticfiles' 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -167,6 +181,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
 }
 
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# import dj_database_url
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
