@@ -112,7 +112,7 @@ if os.getenv("DJANGO_DATABASE_URL", None) is None:
 DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
 DB_PARAMS["NAME"] = "moongchi"
 DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
-DB_PARAMS["OPTIONS"] = {'ssl': {'ca': '/etc/ssl/certs/ca-certificates.crt'}}
+DB_PARAMS["OPTIONS"] = {'ssl': {'ca': os.environ.get('/etc/ssl/certs/ca-certificates.crt')}, 'charset': 'utf8mb4'}
 
 DATABASES = {
     "default": DB_PARAMS,
