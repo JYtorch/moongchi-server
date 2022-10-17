@@ -1,1 +1,1 @@
-web: gunicorn moongchi.wsgi --log-file -
+web: gunicorn --worker-tmp-dir /dev/shm moongchi.wsgi --log-file -
