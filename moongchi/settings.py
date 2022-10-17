@@ -117,18 +117,6 @@ DB_PARAMS["OPTIONS"] = {'ssl': {'ca': os.environ.get('/etc/ssl/certs/ca-certific
 DATABASES = {
     "default": DB_PARAMS,
 }
-# DATABASES = {
-#   'default': {
-#     'ENGINE': 'django.db.backends.mysql',
-#     'NAME': os.environ.get('DB_NAME'),
-#     'HOST': os.environ.get('DB_HOST'),
-#     'PORT': os.environ.get('DB_PORT'),
-#     'USER': os.environ.get('DB_USER'),
-#     'PASSWORD': os.environ.get('DB_PASSWORD'),
-#     'OPTIONS': {'ssl': {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}}
-#   }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
