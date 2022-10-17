@@ -107,16 +107,28 @@ WSGI_APPLICATION = 'moongchi.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-if os.getenv("DJANGO_DATABASE_URL", None) is None:
-    raise Exception("DJANGO_DATABASE_URL environment variable not defined")
-DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
-DB_PARAMS["NAME"] = "moongchi"
-DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
-DB_PARAMS["OPTIONS"] = {"ssl": "true", "charset": "utf8mb4"}
+# if os.getenv("DJANGO_DATABASE_URL", None) is None:
+#     raise Exception("DJANGO_DATABASE_URL environment variable not defined")
+# DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
+# DB_PARAMS["NAME"] = "moongchi"
+# DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
+# DB_PARAMS["OPTIONS"] = {"ssl": "true", "charset": "utf8mb4"}
 
+# DATABASES = {
+#     "default": DB_PARAMS,
+# }
 DATABASES = {
-    "default": DB_PARAMS,
+  'default': {
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': os.environ.get('DB_NAME'),
+    'HOST': os.environ.get('DB_HOST'),
+    'PORT': os.environ.get('DB_PORT'),
+    'USER': os.environ.get('DB_USER'),
+    'PASSWORD': os.environ.get('DB_PASSWORD'),
+    'OPTIONS': {'ssl': {'ca': os.environ.get('MYSQL_ATTR_SSL_CA')}}
+  }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
