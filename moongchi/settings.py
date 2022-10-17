@@ -38,13 +38,14 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # ]
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "http://localhost:8080/,localhost,127.0.0.1").split(",")
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [    
     "https://moongchi.netlify.app",
     "http://localhost:8080",
     "http://127.0.0.1"
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -68,10 +69,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
