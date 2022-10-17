@@ -164,10 +164,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-CORS_ALLOWED_ORIGINS = [
-    'https://moongchi.netlify.app',
-    'http://localhost:8080',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'https://moongchi.netlify.app',
+#     'http://localhost:8080',
+# ]
 
 REST_FRAMEWORK = {
 
