@@ -37,6 +37,11 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 #     '127.0.0.1'
 # ]
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+CORS_ALLOWED_ORIGINS = [    
+    "https://moongchi.netlify.app",
+    "http://localhost:8080",
+    "http://127.0.0.1"
+]
 
 # Application definition
 
