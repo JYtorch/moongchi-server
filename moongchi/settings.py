@@ -36,15 +36,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 #     'moongchi-server.herokuapp.com',
 #     '127.0.0.1'
 # ]
-# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-ALLOWED_HOSTS = [    
-    'moongchi-jytorch.koyeb.app',
-    '127.0.0.1',
-    'localhost'
-]
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 CORS_ALLOWED_ORIGINS = [    
     "https://moongchi.netlify.app",
     "http://localhost:8080",
