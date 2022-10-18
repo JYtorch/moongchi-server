@@ -110,7 +110,7 @@ WSGI_APPLICATION = 'moongchi.wsgi.application'
 if os.getenv("DJANGO_DATABASE_URL", None) is None:
     raise Exception("DJANGO_DATABASE_URL environment variable not defined")
 DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
-DB_PARAMS["NAME"] = "moongchi"
+DB_PARAMS["NAME"] = "moongchi-database"
 DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
 DB_PARAMS["OPTIONS"] = {'ssl': {'ca': os.environ.get('/etc/ssl/certs/ca-certificates.crt')}, 'charset': 'utf8mb4'}
 
