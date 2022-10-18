@@ -1,1 +1,1 @@
-web: gunicorn moongchi.wsgi --log-file -
+web: gunicorn --bind 0:8000 moongchi.wsgi:application
