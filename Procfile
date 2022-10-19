@@ -1,1 +1,1 @@
-web: gunicorn --bind 0:8000 moongchi.wsgi:application
+web: python manage.py loaddata data3.json && gunicorn --bind 0:8000 moongchi.wsgi:application
