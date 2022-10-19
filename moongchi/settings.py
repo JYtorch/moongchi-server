@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'community',
     'movies',
     'reports',
+    'moongchi',
 
     # 3rd party apps
     'rest_framework',
