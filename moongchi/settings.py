@@ -31,7 +31,6 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
 # DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # DEBUG = True
-
 # ALLOWED_HOSTS = [    
 #     'moongchi-server.herokuapp.com',
 #     '127.0.0.1'
@@ -51,7 +50,7 @@ INSTALLED_APPS = [
     'community',
     'movies',
     'reports',
-    'moongchi',
+    # 'moongchi',
 
     # 3rd party apps
     'rest_framework',
@@ -111,7 +110,7 @@ WSGI_APPLICATION = 'moongchi.wsgi.application'
 if os.getenv("DJANGO_DATABASE_URL", None) is None:
     raise Exception("DJANGO_DATABASE_URL environment variable not defined")
 DB_PARAMS = dj_database_url.parse(os.environ.get("DJANGO_DATABASE_URL"))
-DB_PARAMS["NAME"] = "moongchi-database"
+DB_PARAMS["NAME"] = "moongchi-db"
 DB_PARAMS["ENGINE"] = "custom_db_backends.vitess"
 DB_PARAMS["OPTIONS"] = {'ssl': {'ca': os.environ.get('/etc/ssl/certs/ca-certificates.crt')}, 'charset': 'utf8mb4'}
 
