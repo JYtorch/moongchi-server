@@ -30,7 +30,7 @@ with open('movies/recommendations.p', 'rb') as file:
 @api_view(['GET',])
 def mainmovies(request):
     # 현재 상영중인 영화
-    now_movies = Movie.objects.filter(release_date__gte=datetime.datetime.now() - datetime.timedelta(days=100)).filter(
+    now_movies = Movie.objects.filter(release_date__gte=datetime.datetime.now() - datetime.timedelta(days=1000)).filter(
         release_date__lte=datetime.datetime.now().date()).order_by('-popularity')[:25]
     
     # 높은 평점 영화
