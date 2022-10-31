@@ -1,6 +1,14 @@
 #!/bin/bash
 
-for ((i=1; i<=776; i++)); do
+i=1
+while [ "$i" -le 776 ]; do
     python manage.py loaddata movies_data/data-$i.json
-    sleep 5
-done
+    # sleep 3
+    if [ $? -eq 0 ]; then
+        echo [Success] Load data-$i
+        i=$(( i + 1 ))
+    else
+        echo [FAIL]
+        break
+    fi    
+done 
