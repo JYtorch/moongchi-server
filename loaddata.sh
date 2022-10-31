@@ -1,8 +1,8 @@
 #!/bin/bash
 
 i=1
-while [ "$i" -le 776 ]; do
-    python manage.py loaddata movies_data/data-$i.json
+while [ "$i" -le 822 ]; do
+    python manage.py loaddata community_data/data-$i.json
     # sleep 3
     if [ $? -eq 0 ]; then
         echo [Success] Load data-$i
